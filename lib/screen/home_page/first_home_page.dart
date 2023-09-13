@@ -33,6 +33,14 @@ class _FirstHomePageState extends State<FirstHomePage> {
                   SizedBox(width: 10,),
                   Icon(
                     Icons.menu_outlined
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      Icons.arrow_back,
+                    ),
                   )
                 ],
               ),

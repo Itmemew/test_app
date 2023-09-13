@@ -49,8 +49,15 @@ class _LoginPageState extends State<LoginPage> {
                         child: InkWell(
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => SigninPage()));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SigninPage(
+                                    callBackUser: (val) {
+                                      print(">>>>>  $val");
+                                    },
+                                  ),
+                                ),
+                              );
                             },
                             child: Container(
                               margin: EdgeInsets.all(10),

@@ -3,7 +3,9 @@ import 'package:car_trading_app/screen/register_page/new_account_page.dart';
 import 'package:flutter/material.dart';
 
 class SigninPage extends StatefulWidget {
-  const SigninPage({super.key});
+  final Function(String) callBackUser;
+
+  const SigninPage({super.key, required this.callBackUser});
 
   @override
   State<SigninPage> createState() => _SigninPageState();
@@ -31,11 +33,7 @@ class _SigninPageState extends State<SigninPage> {
                 SizedBox(
                   height: 250,
                 ),
-                Center(
-                  child: Text(
-                    'Sign In'
-                  )
-                ),
+                Center(child: Text('Sign In')),
                 SizedBox(
                   height: 250,
                 ),
@@ -52,11 +50,11 @@ class _SigninPageState extends State<SigninPage> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         TextFormField(
-                          controller: cPassword,
-                          validator: (value){
-                            if (value!.isEmpty){
+                          controller: cUsername,
+                          validator: (value) {
+                            if (value!.isEmpty) {
                               return "*กรุณากรอก";
-                            }else {
+                            } else {
                               return null;
                             }
                           },
@@ -66,20 +64,19 @@ class _SigninPageState extends State<SigninPage> {
                             color: Colors.black,
                           ),
                           decoration: InputDecoration(
-                            hintText: 'Username',
-                            hintStyle: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            )
-                          ),
+                              hintText: 'Username',
+                              hintStyle: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              )),
                         ),
                         TextFormField(
-                          controller: cUsername,
-                          validator: (value){
-                            if (value!.isEmpty){
+                          controller: cPassword,
+                          validator: (value) {
+                            if (value!.isEmpty) {
                               return "*กรุณากรอก";
-                            }else {
+                            } else {
                               return null;
                             }
                           },
@@ -94,16 +91,14 @@ class _SigninPageState extends State<SigninPage> {
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15,
-                              )
-                          ),
+                              )),
                         ),
                         InkWell(
                             onTap: () {
-                              if(keyForm.currentState!.validate()){
+                              if (keyForm.currentState!.validate()) {
                                 keyForm.currentState!.save();
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => FirstHomePage()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => FirstHomePage()));
+                                widget.callBackUser.call(cUsername.text);
                               }
                             },
                             child: Container(
@@ -121,11 +116,8 @@ class _SigninPageState extends State<SigninPage> {
                               ),
                             )),
                         GestureDetector(
-                          onTap: (){
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => RegisterPage()));
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
                           },
                           child: Center(
                             child: RichText(
@@ -136,9 +128,7 @@ class _SigninPageState extends State<SigninPage> {
                                   color: Colors.black,
                                 ),
                                 children: [
-                                  TextSpan(text: 'Sign Up',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
+                                  TextSpan(text: 'Sign Up', style: TextStyle(fontWeight: FontWeight.bold)),
                                 ],
                               ),
                             ),
