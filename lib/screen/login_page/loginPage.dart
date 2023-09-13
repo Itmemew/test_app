@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Center(
                 child: Icon(
-                  Icons.abc_rounded,
+                  Icons.ac_unit,
                   size: 50,
                 ),
               ),
