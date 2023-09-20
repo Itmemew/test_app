@@ -1,17 +1,17 @@
+import 'package:car_trading_app/provider/provider_first_page.dart';
 import 'package:car_trading_app/screen/home_page/first_home_page.dart';
-import 'package:car_trading_app/screen/register_page/new_account_page.dart';
+import 'package:car_trading_app/screen/register_page/register_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class SigninPage extends StatefulWidget {
-  final Function(String) callBackUser;
-
-  const SigninPage({super.key, required this.callBackUser});
+class SignInPage extends StatefulWidget {
+  const SignInPage({super.key,});
 
   @override
-  State<SigninPage> createState() => _SigninPageState();
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SigninPageState extends State<SigninPage> {
+class _SignInPageState extends State<SignInPage> {
   final keyForm = GlobalKey<FormState>();
   final cUsername = TextEditingController();
   final cPassword = TextEditingController();
@@ -19,25 +19,37 @@ class _SigninPageState extends State<SigninPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueAccent,
+      backgroundColor: Color(0xff8241f2),
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
+        title: Text('Back'),
+        leading:  IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            )),
+      ),
       body: SafeArea(
-        child: Form(
-          key: keyForm,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.max,
               children: [
-                // Image.asset('assets/images/caricon')
                 SizedBox(
-                  height: 250,
+                  height: MediaQuery.of(context).size.height * 0.2
                 ),
-                Center(child: Text('Sign In')),
+                Image.asset('assets/images/car3.png'),
                 SizedBox(
-                  height: 250,
+                    height: MediaQuery.of(context).size.height * 0.1
                 ),
-                Expanded(
+                Form(
+                  key: keyForm,
                   child: Container(
                     width: double.infinity,
                     padding: EdgeInsets.all(16),
@@ -64,6 +76,9 @@ class _SigninPageState extends State<SigninPage> {
                             color: Colors.black,
                           ),
                           decoration: InputDecoration(
+                              suffixIcon: Icon(
+                                Icons.person_2_outlined,
+                              ),
                               hintText: 'Username',
                               hintStyle: TextStyle(
                                 color: Colors.black,
@@ -86,6 +101,9 @@ class _SigninPageState extends State<SigninPage> {
                             color: Colors.black,
                           ),
                           decoration: InputDecoration(
+                              suffixIcon: Icon(
+                                Icons.lock_outline,
+                              ),
                               hintText: 'Password',
                               hintStyle: TextStyle(
                                 color: Colors.black,
@@ -93,12 +111,15 @@ class _SigninPageState extends State<SigninPage> {
                                 fontSize: 15,
                               )),
                         ),
+                        SizedBox(height: 20,),
                         InkWell(
                             onTap: () {
                               if (keyForm.currentState!.validate()) {
                                 keyForm.currentState!.save();
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => FirstHomePage()));
-                                widget.callBackUser.call(cUsername.text);
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => ChangeNotifierProvider<ProviderFirstPage>(
+                                    create: (BuildContext context) => ProviderFirstPage(),
+                                child: FirstHomePage(),
+                                )));
                               }
                             },
                             child: Container(
@@ -137,7 +158,7 @@ class _SigninPageState extends State<SigninPage> {
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

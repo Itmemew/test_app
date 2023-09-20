@@ -1,5 +1,8 @@
+import 'package:car_trading_app/provider/provider_first_page.dart';
 import 'package:car_trading_app/screen/login_page/signin_page.dart';
+import 'package:car_trading_app/screen/register_page/register_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,9 +13,17 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    });
+    super.initState();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueAccent,
+      backgroundColor: Color(0xff8241f2),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -20,18 +31,10 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Image.asset('assets/images/caricon')
+              SizedBox(height: 180,),
+              Image.asset('assets/images/car3.png'),
               SizedBox(
-                height: 250,
-              ),
-              Center(
-                child: Icon(
-                  Icons.ac_unit,
-                  size: 50,
-                ),
-              ),
-              SizedBox(
-                height: 290,
+                height: 180,
               ),
               Expanded(
                 child: Container(
@@ -51,11 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => SigninPage(
-                                    callBackUser: (val) {
-                                      print(">>>>>  $val");
-                                    },
-                                  ),
+                                  builder: (context) => SignInPage(),
                                 ),
                               );
                             },
@@ -76,7 +75,12 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       Expanded(
                         child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => RegisterPage()));
+                            },
                             child: Container(
                               margin: EdgeInsets.all(10),
                               padding: EdgeInsets.all(8),
